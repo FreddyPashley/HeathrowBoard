@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heathrow RFE '26 Departures Board</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="left-bg"></div>
+            <div class="right-bg">
+                <img id="arr" src="{{url_for('static', filename='arrheader.png')}}" alt="Arr Header PNG">
+            </div>
+            <img id="dep" src="{{url_for('static', filename='depheader.png')}}" alt="Dep Header PNG">
+        </div>
+
+        <!-- Boards -->
+        <div class="boards">
+
+            <!-- Left side: dep1/2/3 -->
+            <div class="left-board">
+                <div class="dep1">
+                    <table class="board-table">
+                        <colgroup>
+                            <col style="width: 10%;">
+                            <col style="width: 40%;">
+                            <col style="width: 12%;">
+                            <col style="width: 38%;">
+                            <col style="width: 10%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th></th><th></th><th></th><th></th>
+                                <th id="gate">Gate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td>20:30</td>
+                                    <td id="destination">Copenhagen</td>
+                                    <td>SK1508</td>
+                                    <td id=red>Flight closing</td>
+                                    <td id="gate">220</td>
+                                </tr>
+                                <tr>
+                                    <td>20:35</td>
+                                    <td id="destination">Dublin</td>
+                                    <td>FR122</td>
+                                    <td id=green>Go to Gate</td>
+                                    <td id="gate">428</td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dep2">
+                    <table class="board-table">
+                        <colgroup>
+                            <col style="width: 10%;">
+                            <col style="width: 40%;">
+                            <col style="width: 12%;">
+                            <col style="width: 38%;">
+                            <col style="width: 10%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th></th><th></th><th></th><th></th>
+                                <th id="gate">Gate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for k in data %}
+                                <tr>
+                                    <td>20:30</td>
+                                    <td id="destination">Copenhagen</td>
+                                    <td>SK1508</td>
+                                    <td id=green>Go to Gate</td>
+                                    <td id="gate">G</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dep3">
+                    <table class="board-table">
+                        <colgroup>
+                            <col style="width: 10%;">
+                            <col style="width: 40%;">
+                            <col style="width: 12%;">
+                            <col style="width: 38%;">
+                            <col style="width: 10%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th></th><th></th><th></th><th></th>
+                                <th id="gate">Gate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for k in data %}
+                                <tr>
+                                    <td>20:30</td>
+                                    <td id="destination">Copenhagen</td>
+                                    <td>SK1508</td>
+                                    <td id=green>Go to Gate</td>
+                                    <td id="gate">G</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Right side: arrivals -->
+            <div class="right-board">
+                <div class="arr1">
+                    <table class="board-table">
+                        <colgroup>
+                            <col style="width: 15%;">
+                            <col style="width: 35%;">
+                            <col style="width: 15%;">
+                            <col style="width: 35%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th></th><th></th><th></th><th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for k in data %}
+                                <tr>
+                                    <td>13:00</td>
+                                    <td id="destination">Calgary</td>
+                                    <td>BA107</td>
+                                    <td>Bags arriving</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
