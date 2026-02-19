@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heathrow RFE '26 Departures Board</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link href="https://db.onlinewebfonts.com/c/dbdd8084a1230061084130f754438fe9?family=Core+Sans+N+W01+53+XMedium" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -26,33 +27,34 @@
                 <div class="dep1">
                     <table class="board-table">
                         <colgroup>
-                            <col style="width: 10%;">
-                            <col style="width: 40%;">
                             <col style="width: 12%;">
-                            <col style="width: 38%;">
-                            <col style="width: 10%;">
+                            <col style="width: 30%;">
+                            <col style="width: 18%;">
+                            <col style="width: 28%;">
+                            <col style="width: 12%;">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th></th><th></th><th></th><th></th>
-                                <th id="gate">Gate</th>
+                                <th class="stand">Stand</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for item in data['dep1'] %}
                                 <tr>
-                                    <td>20:30</td>
-                                    <td id="destination">Copenhagen</td>
-                                    <td>SK1508</td>
-                                    <td id=red>Flight closing</td>
-                                    <td id="gate">220</td>
+                                    <td>{{item['time']}}</td>
+                                    <td class="destination">{{item['arrival_airport']}}</td>
+                                    <td>{{item['flight_number']}}</td>
+                                    <td class="{{item['colour']}}">{{item['state']}}</td>
+                                    <td class="yellow stand">{{item['gate'][1]}}</td>
                                 </tr>
-                                <tr>
-                                    <td>20:35</td>
-                                    <td id="destination">Dublin</td>
-                                    <td>FR122</td>
-                                    <td id=green>Go to Gate</td>
-                                    <td id="gate">428</td>
+                            {% endfor %}
+
+                            {% for i in range(23 - data['dep1']|length) %}
+                                <tr class="blank-row">
+                                    <td colspan="5"><wbr></wbr></td>
                                 </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -60,57 +62,38 @@
                 <div class="dep2">
                     <table class="board-table">
                         <colgroup>
-                            <col style="width: 10%;">
-                            <col style="width: 40%;">
                             <col style="width: 12%;">
-                            <col style="width: 38%;">
-                            <col style="width: 10%;">
+                            <col style="width: 30%;">
+                            <col style="width: 18%;">
+                            <col style="width: 28%;">
+                            <col style="width: 12%;">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th></th><th></th><th></th><th></th>
-                                <th id="gate">Gate</th>
+                                <th class="stand">Stand</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {% for k in data %}
+                        <tbody class="dep2body">
+                            {% for item in data['dep2'] %}
                                 <tr>
-                                    <td>20:30</td>
-                                    <td id="destination">Copenhagen</td>
-                                    <td>SK1508</td>
-                                    <td id=green>Go to Gate</td>
-                                    <td id="gate">G</td>
+                                    <td>{{item['time']}}</td>
+                                    <td class="destination">{{item['arrival_airport']}}</td>
+                                    <td>{{item['flight_number']}}</td>
+                                    <td class="{{item['colour']}}">{{item['state']}}</td>
+                                    <td class="yellow stand">{{item['gate'][1]}}</td>
                                 </tr>
                             {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
 
-                <div class="dep3">
-                    <table class="board-table">
-                        <colgroup>
-                            <col style="width: 10%;">
-                            <col style="width: 40%;">
-                            <col style="width: 12%;">
-                            <col style="width: 38%;">
-                            <col style="width: 10%;">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th></th><th></th><th></th><th></th>
-                                <th id="gate">Gate</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for k in data %}
-                                <tr>
-                                    <td>20:30</td>
-                                    <td id="destination">Copenhagen</td>
-                                    <td>SK1508</td>
-                                    <td id=green>Go to Gate</td>
-                                    <td id="gate">G</td>
+                            {% for i in range(23 - data['dep2']|length) %}
+                                <tr class="blank-row">
+                                    <td colspan="5"><wbr></wbr></td>
                                 </tr>
                             {% endfor %}
+
+                            <tr id="banner">
+                                <td colspan="5">Please keep your luggage and belongings with you at all times</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -121,23 +104,74 @@
                 <div class="arr1">
                     <table class="board-table">
                         <colgroup>
-                            <col style="width: 15%;">
-                            <col style="width: 35%;">
-                            <col style="width: 15%;">
-                            <col style="width: 35%;">
+                            <col style="width: 10%;">
+                            <col style="width: 45%;">
+                            <col style="width: 18%;">
+                            <col style="width: 27%;">
                         </colgroup>
                         <thead>
                             <tr>
-                                <th></th><th></th><th></th><th></th>
+                                <th colspan="5" class="board-title">
+                                    <div class="title-row">
+                                        <div class="title-left">
+                                            Heathrow RFE 2026
+                                        </div>
+                                        <div class="title-right">
+                                            {{timenow}}
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="arr1body">
+                            {% for item in data['arr1'] %}
+                                <tr>
+                                    <td>{{item['time']}}</td>
+                                    <td class="destination">{{item['departure_airport']}}</td>
+                                    <td>{{item['flight_number']}}</td>
+                                    <td class="pre-space">{{item['state']}}</td>
+                                </tr>
+                            {% endfor %}
+
+                            {% for i in range(24 - data['arr1']|length) %}
+                                <tr class="blank-row">
+                                    <td colspan="5"><wbr></wbr></td>
+                                </tr>
+                            {% endfor %}
+
+                            <tr id="banner">
+                                <td colspan="5">Welcome to the Heathrow RFE 2026!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="arr2">
+                    <table class="board-table">
+                        <colgroup>
+                            <col style="width: 10%;">
+                            <col style="width: 45%;">
+                            <col style="width: 18%;">
+                            <col style="width: 27%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th colspan="4"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for k in data %}
+                            {% for item in data['arr2'] %}
                                 <tr>
-                                    <td>13:00</td>
-                                    <td id="destination">Calgary</td>
-                                    <td>BA107</td>
-                                    <td>Bags arriving</td>
+                                    <td>{{item['time']}}</td>
+                                    <td class="destination">{{item['departure_airport']}}</td>
+                                    <td>{{item['flight_number']}}</td>
+                                    <td class="pre-space">{{item['state']}}</td>
+                                </tr>
+                            {% endfor %}
+
+                            {% for i in range(24 - data['dep1']|length) %}
+                                <tr class="blank-row">
+                                    <td colspan="5"><wbr></wbr></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -1,7 +1,16 @@
+@font-face {
+    font-family: "Core Sans N 53 Exp Medium";
+    src: url("/static/AkzidenzGroteskBE-Md.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 html, body {
     height: 100%;
     margin: 0;
-    font-family: "Frutiger", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Akzidenz Grotesk BE";
 }
 
 .container {
@@ -25,24 +34,24 @@ html, body {
     top: 0;
     left: 0;
     height: 100%;
-    width: calc(75% - 1vw);
-    background-color: #ff0;
+    width: calc(50% - 0.5vw);
+    background-color: #fdcd01;
     z-index: 0;
 }
 
-/* Right yellow background */
 .right-bg {
     position: absolute;
     top: 0;
-    left: 75%;
+    right: 0;
     height: 100%;
-    width: 25%;
-    background-color: #ff0;
+    width: calc(50% - 0.5vw);
+    background-color: #fdcd01;
     z-index: 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
+
 
 /* Images */
 #dep, #arr {
@@ -60,31 +69,28 @@ html, body {
     display: flex;
     gap: 1vw;
     background-color: #000;
-    padding: 1vw;
+    padding-left: 0;
+    padding-right: 0;
     box-sizing: border-box;
 }
 
-/* Left 3/4 section */
+
+/* Left half */
 .left-board {
-    width: 75%;
+    flex: 1;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    padding-right: 1vw;
     gap: 1vw;
 }
 
-/* Right 1/4 section */
+/* Right half */
 .right-board {
-    width: 25%;
+    flex: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    padding-left: 1vw;       /* padding-left + padding-right */
-    box-sizing: border-box; /* include padding in width */
+    flex-direction: row;
+    gap: 1vw;
 }
+
 
 
 .left-board > div, .right-board > div {
@@ -103,6 +109,7 @@ html, body {
     border-collapse: collapse;
     margin: 0;
     border: none;
+    table-layout: fixed;
 }
 
 /* Blue Gate header row */
@@ -117,6 +124,25 @@ html, body {
     font-family: "Frutiger", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.arr1 thead th {
+    background-color: #7487a1 !important;
+}
+
+.arr2 thead th {
+    background-color: #7487a1 !important;
+}
+
+#banner {
+    background-color: #06c;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+    font-family: "Frutiger", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.2;
+    border-bottom: none;
+}
+
+
 /* Table cells */
 .board-table td, .board-table th {
     padding: 1vh 0.25vw;
@@ -124,6 +150,10 @@ html, body {
     border: 1px solid #444;
     color: #fff;
     border: none;
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .board-table thead tr {
@@ -134,27 +164,86 @@ html, body {
     border-bottom: 1px solid #eeeeee;
 }
 
-.board-table tbody tr:nth-child(21) {
-    border-bottom: none;
+.board-table tbody tr:nth-child(24) {
+    border-bottom: 1px solid #444;
 }
 
-
-#gate {
-    text-align: left;
+.dep2body tbody tr:nth-child(23) {
+    border-bottom: 1px solid #444;
 }
 
-#destination {
-    color: #ff0;
+.arr1body tbody tr:nth-child(23) {
+    border-bottom: 1px solid #444;
 }
 
-#green {
-    color: #0f0;
+.blank-row {
+    border-bottom: none !important;
 }
 
-#red {
-    color: #ff0;
+.destination {
+    color: #dadb00 !important;
+    max-width: 40%;
 }
 
-#white {
-    color: #fff;
+.green {
+    color: #09a700  !important;
+}
+
+.red {
+    color: #ff442f  !important;
+}
+
+.yellow {
+    color: #dadb00  !important;
+}
+
+.white {
+    color: #fff !important;
+}
+
+.board-title {
+    padding: 0;
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 0.5vw;
+}
+
+.title-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.title-left {
+    font-size: 1em;
+}
+
+.title-right {
+    font-weight: bold;
+    text-align: right;
+    font-size: 1em;
+}
+
+.pre-space {
+    white-space: pre !important;
+}
+
+.stand {
+    text-align: center !important;
+}
+
+.dep2,
+.arr1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.dep2 .board-table,
+.arr1 .board-table {
+    height: 100%;
 }
